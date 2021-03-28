@@ -1,15 +1,42 @@
 package com.surabhi.flightreservation.entities;
 
-import java.security.Timestamp;
-import java.sql.Date;
+import java.sql.Timestamp;
+import java.util.Date;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
+
 @Entity
+@Getter
+@Setter
+@ToString
 public class Flight extends AbstractEntity{
 
+//	//@Column(name = "FLIGHT_NUMBER")
+//	private String flightNumber;
+//	
+//	//@Column(name = "OPERATING_AIRLINES")
+//	private String operatingAirlines;
+//	
+//	//@Column(name = "DEPARTURE_CITY")
+//	private String departureCity;
+//	
+//	//@Column(name = "ARRIVAL_CITY")
+//	private String arrivalCity;
+//	
+//	//@Column(name = "DATE_OF_DEPARTURE")
+//	private Date dateOfDeparture;
+//	
+//	//@Column(name = "ESTIMATED_DEPARTURE_TIME")
+//	private Timestamp estimatedDepartureTime;
+	
+	
 	private String flightNumber;
-	private String operatingAirplines;
+	private String operatingAirlines;
 	private String departureCity;
 	private String arrivalCity;
 	private Date dateOfDeparture;
@@ -23,12 +50,12 @@ public class Flight extends AbstractEntity{
 		this.flightNumber = flightNumber;
 	}
 
-	public String getOperatingAirplines() {
-		return operatingAirplines;
+	public String getOperatingAirlines() {
+		return operatingAirlines;
 	}
 
-	public void setOperatingAirplines(String operatingAirplines) {
-		this.operatingAirplines = operatingAirplines;
+	public void setOperatingAirlines(String operatingAirlines) {
+		this.operatingAirlines = operatingAirlines;
 	}
 
 	public String getDepartureCity() {
@@ -63,4 +90,16 @@ public class Flight extends AbstractEntity{
 		this.estimatedDepartureTime = estimatedDepartureTime;
 	}
 
+	@Override
+	public String toString() {
+		return "Flight [flightNumber=" + flightNumber + ", operatingAirlines=" + operatingAirlines + ", departureCity="
+				+ departureCity + ", arrivalCity=" + arrivalCity + ", dateOfDeparture=" + dateOfDeparture
+				+ ", estimatedDepartureTime=" + estimatedDepartureTime + "]";
+	}
+
+
+
 }
+
+
+
