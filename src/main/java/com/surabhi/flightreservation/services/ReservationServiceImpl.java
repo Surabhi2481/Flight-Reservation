@@ -10,6 +10,8 @@ import com.surabhi.flightreservation.entities.Reservation;
 import com.surabhi.flightreservation.repos.FlightRepository;
 import com.surabhi.flightreservation.repos.PassengerRepository;
 import com.surabhi.flightreservation.repos.ReservationRepository;
+import com.surabhi.flightreservation.util.EmailUtil;
+import com.surabhi.flightreservation.util.PDFGenerator;
 
 @Service
 public class ReservationServiceImpl implements ReservationService {
@@ -22,6 +24,12 @@ public class ReservationServiceImpl implements ReservationService {
 	
 	@Autowired
 	ReservationRepository reservationRepository;
+	
+	@Autowired
+	PDFGenerator pdfGenerator;
+	
+	@Autowired
+	EmailUtil emailUtil;
 	
 	@Override
 	public Reservation bookFlight(ReservationRequest request) {
@@ -40,6 +48,10 @@ public class ReservationServiceImpl implements ReservationService {
 		reservation.setPassenger(savedPassenger);
 		reservation.setCheckedIn(false);
 		Reservation savedReservation = reservationRepository.save(reservation);
+		
+		String filePath = "Z:\\Docs/Reservation/reservation"+savedReservation.getId()+".pdf";
+		pdfGenerator.generateItinerary(savedReservation, filePath);
+		emailUtil.sendItinenary(passenger.getEmail(), filePath);
 		
 		return savedReservation;
 	}
