@@ -5,7 +5,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.surabhi.flightreservation.controllers.ReservationController;
 import com.surabhi.flightreservation.dto.ReservationRequest;
 import com.surabhi.flightreservation.entities.Flight;
 import com.surabhi.flightreservation.entities.Passenger;
