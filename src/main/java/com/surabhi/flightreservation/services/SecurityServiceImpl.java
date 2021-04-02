@@ -1,6 +1,7 @@
 package com.surabhi.flightreservation.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -24,6 +25,9 @@ public class SecurityServiceImpl implements SecurityService {
 		
 		authenticationManager.authenticate(token);
 		boolean result = token.isAuthenticated();
+		if(result) {
+			SecurityContextHolder.getContext().setAuthentication(token);
+		}
 		return result;
 	}
 
