@@ -3,6 +3,7 @@ package com.surabhi.flightreservation.services;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import com.surabhi.flightreservation.dto.ReservationRequest;
@@ -17,6 +18,9 @@ import com.surabhi.flightreservation.util.PDFGenerator;
 
 @Service
 public class ReservationServiceImpl implements ReservationService {
+
+	@Value("${com.surabhi.flightreservation.itinerary.dirpath}")
+	private String ITINERARY_DIR;
 
 	@Autowired
 	FlightRepository flightRepository;
@@ -59,7 +63,7 @@ public class ReservationServiceImpl implements ReservationService {
 		LOGGER.info("Saving the reservation "+reservation);
 		Reservation savedReservation = reservationRepository.save(reservation);
 		
-		String filePath = "Z:\\Docs/Reservation/reservation"+savedReservation.getId()+".pdf";
+		String filePath = ITINERARY_DIR+savedReservation.getId()+".pdf";
 		LOGGER.info("Generating the Itinerary");
 		pdfGenerator.generateItinerary(savedReservation, filePath);
 		emailUtil.sendItinenary(passenger.getEmail(), filePath);

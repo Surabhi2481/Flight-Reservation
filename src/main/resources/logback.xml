@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration>
 	<property name="LOG_DIR" value="Z:/Docs/logs" />
-	<property name="FILE_PREFIX" value="flightreservation" />
+	<property name="FILE_PREFIX" value="flightreservations" />
 	<appender name="FILE"
 		class="ch.qos.logback.core.rolling.RollingFileAppender">
 		<file>${LOG_DIR}/${FILE_PREFIX}.log</file>
@@ -20,3 +20,4 @@
 		<appender-ref ref="FILE" />
 	</root>
 </configuration>
+
