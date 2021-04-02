@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.surabhi.flightreservation.entities.User;
 import com.surabhi.flightreservation.repos.UserRepository;
+import com.surabhi.flightreservation.services.SecurityService;
 
 @Controller
 public class UserController {
@@ -22,6 +23,9 @@ public class UserController {
 	
 	@Autowired
 	private BCryptPasswordEncoder encoder;
+	
+	@Autowired
+	private SecurityService securityService;
 	
 	private static final Logger LOGGER = LoggerFactory.getLogger(UserController.class);
 	
@@ -51,9 +55,8 @@ public class UserController {
 	@RequestMapping(value="/login", method = RequestMethod.POST)
 	public String Login(@RequestParam("email") String email, @RequestParam("password") String password, ModelMap modelMap) {
 		LOGGER.info("Inside Login() and the email is : "+email);
-		
-		User user = userRepository.findByEmail(email);
-		if(user.getPassword().equals(password)) {
+		boolean loginResponse = securityService.login(email, password);
+		if(loginResponse) {
 			return "findFlights";
 		}
 		else {
